@@ -1,145 +1,373 @@
-#jumbotron {
-  background: url(assets/img/wavey-grid.jpg) center center no-repeat;  background-size: cover;
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.outer{
+  border-radius: 15px;
+  border: 2px solid black;
+  padding: 30px;
+  margin: 30px;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+.side{
+  flex: 20%;
+  /* background-color: #f1f1f1; */
+  padding: 20px;
+}
+.dotted-nav{
+  margin-top: 100px;
+  border-top: 2px dashed black;
+}
+.content{
+  flex: 80%;
+  background-color: rgb(243, 243, 243);
+  /* padding: 20px; */
+  border-radius: 15px;
+  border: 2px solid black;
+}
+#logo{
+  width: 150px;
+  padding-top: 20px;
+}
+.contentOne{
+  flex: 60%;
+  /* background-color: purple; */
+  padding: 0 20px;
+  border-radius: 15px;
+}
+.contentTwo{
+  flex: 40%;
+  padding: 20px;
+  border-radius: 15px;
+}
+.titleSettings{
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+h1{
+  font-size: 60px;
+  font-family: "Damion", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+h2{
+  font-family: "Damion", cursive;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 30px;
+}
+.navMain{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
 }
-
-#jumbotron > h2 {
-  color: white;
-  text-align: center;
+.subNavMain{
+  display: flex;
 }
+.navText{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  display:inline-block;
+  margin:10px;
+}
+.dot {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: rgb(142, 142, 142);
+  display:inline-block;
+  margin:10px;
+}
+.navTextBottom{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+}
+.socialIcon{
+  width: 15px;
+  margin-right: 10px;
+}
+.regText{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+#themeButton{
+  margin: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+}
+.dotted{
+  border-top: 2px dashed black;
+  margin: 20px;
 
-#jumbotron > a {
-  text-decoration: none;
+}
+.greetingDate{
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+.date{
+  margin-left: 30px;
+}
+.toDoList{
   background-color: white;
-  font-size: 1.5em;
-  padding: 1.5rem;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+  margin: 20px;
 }
-
-form {
-  border: solid 1px black;
-  display: flex;
-  flex-direction: column;
-  margin: 1rem 1rem;
+.weather{
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+  line-height: 10px;
+  text-align: center;
+  margin: 20px;
 }
-
-form > * {
-  margin: 0.5rem;
+#weatherText{
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
-
-form > input[type="submit"] {
-  width: 40%;
-  margin: 0.5rem;
-  margin-right: auto;
+.weatherText{
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
-
-footer {
-  border-top: solid 1px black;
-  padding: 2rem 2rem 4rem;
-  margin: 1rem 1rem;
+.goals{
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+  line-height: 10px;
+  margin-top: 10px;
+  margin: 20px;
 }
-
-#bio {
-  margin: 1rem;
-}
-
-#pizzas {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.2em;
-  height: auto;
-  width: 92.5%;
-  margin: auto;
-}
-
-#pizzas tbody {
-  width: 100%;
-}
-
-#pizzas th {
-  text-align: left;
-}
-
-#pizzas td,th {
-  width: 25%;
-}
-
-#oops404 img {
-  max-width: 40%;
-  margin-left: 30%;
-}
-
-#oops404 .attribution {
-  font-size: 0.7em;
+.noteHeader{
   text-align: center;
 }
-
-@media (max-width: 549px){
-  .hidden--mobile {
-    display: none !important;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  nav > i {
-    padding: 1rem;
-    font-size: 2em;
-  }
-
-  nav > ul {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 0 0;
-  }
-
-  nav > ul > li {
-    padding: 0.5rem;
-    list-style-type: none;
-  }
-
-  #bio img {
-    float: left;
-    width: 40%;
-    height: auto;
-    margin-right: 1rem;
-  }
+.notes{
+  background-color: rgb(234, 234, 234);
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+  line-height: 10px;
+  margin-top: 10px;
+  margin: 20px;
 }
-
+.heartStarCircleSection{
+  padding: 10px;
+  text-align: center;
+  margin: 20px;
+}
+.heartStarCircle{
+  padding: 10px;
+  width: 80px;
+}
+.aboutImageRight{
+  padding: 10px;
+  line-height: 10px;
+  text-align: center;
+}
+.aboutImg{
+  padding: 0 20px;
+  flex: 50%;
+}
+.aboutImgOne{
+  margin: 20px;
+  width: 400px;
+}
+.rowAbout{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 20px;
+}
+.rowAboutTwo{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(234, 234, 234);
+  border-radius: 5px;
+  margin:  0 20px;
+}
+.about{
+  flex: 50%;
+  padding: 0 20px;
+  line-height: 20px;
+}
+.aboutTwoImg{
+  /* flex: 50%; */
+  /* background-color: blue; */
+  padding: 20px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+.headingOne{
+  font-size: 30px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 550;
+  font-style: normal;
+}
+.headingTwo{
+  margin-top: 40px;
+  font-size: 25px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 550;
+  font-style: normal;
+}
+.generalButton{
+  background-color: white;
+  padding: 10px;
+  border: none;
+}
+.contact{
+    flex: 50%;
+    padding: 0 20px;
+}
+.contactLeft{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 20px;
+}
+.contactRight{
+  padding: 0 20px;
+  flex: 50%;
+}
+.headingContact{
+  font-size: 30px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 550;
+  font-style: normal;
+}
+.contactText{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 10px;
+}
+input{
+  padding: 10px;
+  width: 250px;
+  border: solid 1px black;
+}
+.submitButton{
+  background-color: rgb(234, 234, 234);
+  padding: 10px;
+  border: solid 1px black;
+  margin: 20px 0;
+}
 @media (min-width: 550px) {
-  nav > ul {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 0 0;
-  }
-
-  nav > ul > li {
-    display: inline-block;
-    text-decoration: none;
-    border: 1px solid;
-    padding: 0.5rem 0.5rem;
-    border-radius: 25px;
-  }
-
   nav > .fa-bars {
     display: none;
   }
-
-  #bio {
-    margin-right: 3rem;
+}
+@media (max-width: 550px) {
+  .hidden--mobile {
+    display: none;
   }
-
-  #bio img {
-    float: left;
-    width: 25%;
-    height: auto;
-    margin-right: 1rem;
+}
+@media screen and (max-width: 700px) {
+  .row{
+    flex-direction: column;
   }
+}
+@media (max-width: 550px) {
+  .row{
+    width: 100%;
+  }
+}
+@media (max-width: 550px) {
+  .content{
+    width: 100%;
+  }
+}
+@media (max-width: 550px) {
+  .content > .row{
+    width: 100%;
+  }
+}
+@media (max-width: 550px) {
+  .contentOne, .contentTwo{
+    width: 100%;
+  }
+}
+@media (max-width: 550px) {
+  #themeButton{
+    display: none;
+  }
+}
+@media (max-width: 550px) {
+  .heartStarCircleSection{
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+  }
+}
+@media (max-width: 550px) {
+  .heartStarCircle{
+    width: 40px;
+  }
+}
+@media (max-width: 550px) {
+  .headingOne{
+    line-height: 30px;
+  }
+}
+@media (max-width: 550px) {
+  img.aboutImgOne{
+    margin: 0px;
+    width: 100%;
+    padding: 0px;
+  }
+}
+@media (max-width: 550px) {
+  img.aboutTwoImg{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+@media (max-width: 550px) {
+  .rowAboutTwo{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(243, 243, 243);
+    border-radius: 5px;
+    padding: 20px 0px;
+  }
+}
+@media (max-width: 550px) {
+  input{
+    padding: 10px;
+    width: 100%;
+    border: solid 1px black;
+  }
+}
+@media (max-width: 550px) {
+  .contactText{
+    width: 50%;
+    word-wrap: break-word;
+    line-height: 30px;;
+  }
+}
+.mainTitle{
+  font-size: 4em;;
 }
