@@ -1,5 +1,7 @@
-export { default as aboutMe } from "./aboutMe";
-export { default as home } from "./home";
-export { default as order } from "./order";
-export { default as pizza } from "./pizza";
+export { default as about } from "./about";
+export { default as contact } from "./contact";
+export { default as daily } from "./daily";
+export { default as weekly } from "./weekly";
+export { default as monthly } from "./monthly";
+export { default as name } from "./name";
 export { default as viewNotFound } from "./viewNotFound";

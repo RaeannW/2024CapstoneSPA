@@ -5,4 +5,4 @@ export default [
     { url: "/monthly", text: "Monthly" },
     { url: "/about", text: "About" },
     { url: "/contact", text: "Contact" },
-  ];
+];

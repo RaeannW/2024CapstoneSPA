@@ -9,7 +9,7 @@ import navItem from "./navItem.js";
 //  - data-navigo is a switch that allows Navigo to handle our page routing
 export default navItems => {
   return html`
- <nav>
+ <!-- <nav>
             <i class="fas fa-bars"></i>
             <div class="hidden--mobile nav-links">
           <img id="logo" src="images/planPalLogo.png">
@@ -48,4 +48,16 @@ export default navItems => {
           <h4 class="navTextBottom">Planpal app © 2024</h4>
       </nav>
   `;
+}; -->
+
+export default navItems => {
+  return html`
+    <nav>
+      <i class="fas fa-bars"></i>
+      <ul class="">
+        ${navItems.map(item => navItem(item)).join("")}
+      </ul>
+    </nav>
+  `;
 };
+

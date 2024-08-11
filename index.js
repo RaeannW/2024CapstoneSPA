@@ -6,7 +6,7 @@ import axios from "axios";
 
 const router = new Navigo("/"); //creates new Navigo object
 
-function render(state = store.home) {
+function render(state = store.daily) {
   document.querySelector("#root").innerHTML = `
       ${header(state)}
       ${nav(store.nav)}
@@ -23,12 +23,12 @@ router.hooks({
   // https://github.com/krasimir/navigo/blob/master/DOCUMENTATION.md#match
   before: (done, match) => {
     // We need to know what view we are on to know what data to fetch
-    const view = match?.data?.view ? camelCase(match.data.view) : "home";
+    const view = match?.data?.view ? camelCase(match.data.view) : "daily";
     // Add a switch case statement to handle multiple routes
     switch (view) {
       // Add a case for each view that needs data from an API
       // New Case for the Home View
-      case "home":
+      case "daily":
         axios
           // Get request to retrieve the current weather data using the API key and providing a city name
           .get(
@@ -36,7 +36,7 @@ router.hooks({
           )
           .then((response) => {
             // Create an object to be stored in the Home state from the response
-            store.home.weather = {
+            store.daily.weather = {
               city: response.data.name,
               temp: response.data.main.temp,
               feelsLike: response.data.main.feels_like,
@@ -49,10 +49,10 @@ router.hooks({
             done();
           });
         break;
-      case "pizza":
+      case "weekly":
         // New Axios get request utilizing already made environment variable
         axios
-          .get(`${process.env.WEATHER_API_URL}/daily`)
+          .get(`${process.env.WEATHER_API_URL}/weekly`)
           .then((response) => {
             store.pizza.pizzas = response.data;
             console.log("response", response);
@@ -70,7 +70,7 @@ router.hooks({
     }
   },
   already: (match) => {
-    const view = match?.data?.view ? camelCase(match.data.view) : "home";
+    const view = match?.data?.view ? camelCase(match.data.view) : "daily";
 
     render(store[view]);
   },
@@ -92,7 +92,7 @@ router
     // This reduces the number of checks that need to be performed
     ":view": (match) => {
       // Change the :view data element to camel case and remove any dashes (support for multi-word views)
-      const view = match?.data?.view ? camelCase(match.data.view) : "home";
+      const view = match?.data?.view ? camelCase(match.data.view) : "daily";
       // Determine if the view name key exists in the store object
       if (view in store) {
         render(store[view]);
