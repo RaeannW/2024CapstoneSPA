@@ -54,7 +54,7 @@ router.hooks({
         axios
           .get(`${process.env.WEATHER_API_URL}/weekly`)
           .then((response) => {
-            store.pizza.pizzas = response.data;
+            store.weekly.weather = response.data;
             console.log("response", response);
             done();
           })
@@ -78,9 +78,9 @@ router.hooks({
     router.updatePageLinks();
 
     // add menu toggle to bars icon in nav bar
-    document.querySelector(".fa-bars").addEventListener("click", () => {
-      document.querySelector("nav > ul").classList.toggle("hidden--mobile");
-    });
+    // document.querySelector(".fa-bars").addEventListener("click", () => {
+    //   document.querySelector("nav > ul").classList.toggle("hidden--mobile");
+    // });
   },
 });
 
