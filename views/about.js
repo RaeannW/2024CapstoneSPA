@@ -5,7 +5,7 @@ import circle from "../assets/img/circle.svg";
 
 export default () => html`
   <section>
-  <div class="outer">
+  <!-- <div class="outer"> -->
       <div class="row">
         <div class="side">
           <!-- <nav>
@@ -46,10 +46,10 @@ export default () => html`
           <img class="socialIcon" src="images/Pinterest.svg">
           <h4 class="navTextBottom">Planpal app © 2024</h4>
       </nav> -->
-      </div>
+      <!-- </div>
       <div class="content">
         <div class="row">
-          <div class="contentOne">
+          <div class="contentOne"> -->
             <div class="titleSettings">
               <h1 class="mainTitle">About</h1>
             </div>
@@ -88,10 +88,11 @@ export default () => html`
               pellentesque dignissim. Non diam phasellus vestibulum lorem. Fringilla phasellus faucibus scelerisque
               eleifend donec pretium. </p>
             <button class="generalButton">Contact Us</button>
-          </div>
-        </div>
+          <!-- </div>
+        </div>        
       </div>
-    </div>
+      </div>
+    </div> -->
   </div>
-</section>
+<!-- </section> -->
 `;
