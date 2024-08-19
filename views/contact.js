@@ -8,7 +8,7 @@ import website from "../assets/img/link.svg";
 
 export default () => html`
   <section>
-  <div class="outer">
+  <!-- <div class="outer"> -->
         <div class="row">
           <div class="side">
             <!-- <nav>
@@ -102,6 +102,6 @@ export default () => html`
         </div>
       </div>
     </div>
-    </div>
+    <!-- </div> -->
 </section>
 `;
