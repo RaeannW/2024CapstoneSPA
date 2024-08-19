@@ -11,50 +11,51 @@ export default navItems => {
   return html`
     <nav>
       <i class="fas fa-bars"></i>
+
+      <nav>
+  <i class="fas fa-bars"></i>
+  <ul>
+  <li class="hidden--mobile nav-links">
+<img id="logo" src="images/planPalLogo.png">
+<li class="navMain">
+  <li class="subNavMain">
+    <span class="dot"></span>
+    <h3 class="navText">name</h3>
+  </li>
+  <li class="subNavMain">
+    <span class="dot"></span>
+    <a href="index.html">
+      <h3 class="navText">daily</h3>
+    </a>
+  </li>
+  <li class="subNavMain">
+    <span class="dot"></span>
+    <h3 class="navText">weekly</h3>
+  </li>
+  <li class="subNavMain">
+    <span class="dot"></span>
+    <h3 class="navText">monthly</h3>
+  </li>
+</li>
+<hr class="dotted-nav">
+<li><a href="about.html">
+  <h4 class="navTextBottom">about</h4>
+</a></li>
+<li><a href="contact.html">
+  <h4 class="navTextBottom">contact</h4>
+</a></li>
+</ul>
+<li><h4 class="navTextBottom">follow us:</h4></li>
+<li><img class="socialIcon" src="images/Instagram.svg"></li>
+<li><img class="socialIcon" src="images/LinkedIn.svg"></li>
+<li><img class="socialIcon" src="images/GitHub.svg"></li>
+<li><img class="socialIcon" src="images/Pinterest.svg"></li>
+<h4 class="navTextBottom">Planpal app © 2024</h4>
+</nav>
+
       <ul class="">
         ${navItems.map(item => navItem(item)).join("")}
       </ul>
     </nav>
   `;
 };
-
-//  <!-- <nav>
-//             <i class="fas fa-bars"></i>
-//             <div class="hidden--mobile nav-links">
-//           <img id="logo" src="images/planPalLogo.png">
-//           <div class="navMain">
-//             <div class="subNavMain">
-//               <span class="dot"></span>
-//               <h3 class="navText">name</h3>
-//             </div>
-//             <div class="subNavMain">
-//               <span class="dot"></span>
-//               <a href="index.html">
-//                 <h3 class="navText">daily</h3>
-//               </a>
-//             </div>
-//             <div class="subNavMain">
-//               <span class="dot"></span>
-//               <h3 class="navText">weekly</h3>
-//             </div>
-//             <div class="subNavMain">
-//               <span class="dot"></span>
-//               <h3 class="navText">monthly</h3>
-//             </div>
-//           </div>
-//           <hr class="dotted-nav">
-//           <a href="about.html">
-//             <h4 class="navTextBottom">about</h4>
-//           </a>
-//           <a href="contact.html">
-//             <h4 class="navTextBottom">contact</h4>
-//           </a>
-//           <h4 class="navTextBottom">follow us:</h4>
-//           <img class="socialIcon" src="images/Instagram.svg">
-//           <img class="socialIcon" src="images/LinkedIn.svg">
-//           <img class="socialIcon" src="images/GitHub.svg">
-//           <img class="socialIcon" src="images/Pinterest.svg">
-//           <h4 class="navTextBottom">Planpal app © 2024</h4>
-//       </nav>
-//   `;
-// ; -->
