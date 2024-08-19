@@ -2,11 +2,94 @@ import html from "html-literal";
 import dogpic from "../assets/img/dog-with-flower.jpg";
 
 export default () => html`
-  <section id="bio">
-    <h2>Vivamus ac justo eu nisi</h2>
-    <img src="${dogpic}" alt="me">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sagittis nulla. Etiam semper mauris a quam tempus, non feugiat massa posuere. Morbi vitae nisi aliquam, semper diam id, molestie leo. In hac habitasse platea dictumst. Nulla et enim vel elit dictum viverra. Nunc pharetra lacinia arcu sit amet dignissim. Pellentesque ut mi nulla.</p>
-    <p>Quisque at hendrerit libero, eget interdum lectus. Etiam facilisis leo nulla, sit amet imperdiet nunc molestie vel. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur consectetur felis a purus volutpat, sed finibus magna iaculis. Pellentesque tristique tristique turpis nec vehicula. Maecenas varius quis tellus id mollis. Vivamus ut ultrices ligula.</p>
-    <p>Etiam egestas consectetur gravida. Nulla mollis suscipit sapien sed fermentum. Integer vitae eros a magna vulputate aliquam. Suspendisse sed pulvinar augue, auctor mollis lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis eleifend diam quis libero sollicitudin efficitur. Nullam sapien eros, tempor eget vulputate ut, interdum vel orci. Donec sit amet tempor mi. Nam feugiat cursus egestas. Suspendisse eget orci et ex mattis ornare tempor non tellus. Suspendisse gravida neque in urna congue bibendum. Duis dui odio, pharetra nec odio ac, ornare vulputate nibh.</p>
-  </section>
+  <section>
+  <div class="outer">
+      <div class="row">
+        <div class="side">
+          <nav>
+            <i class="fas fa-bars"></i>
+            <div class="hidden--mobile nav-links">
+          <img id="logo" src="images/planPalLogo.png">
+          <div class="navMain">
+            <div class="subNavMain">
+              <span class="dot"></span>
+              <h3 class="navText">name</h3>
+            </div>
+            <div class="subNavMain">
+              <span class="dot"></span>
+              <a href="index.html">
+                <h3 class="navText">daily</h3>
+              </a>
+            </div>
+            <div class="subNavMain">
+              <span class="dot"></span>
+              <h3 class="navText">weekly</h3>
+            </div>
+            <div class="subNavMain">
+              <span class="dot"></span>
+              <h3 class="navText">monthly</h3>
+            </div>
+          </div>
+          <hr class="dotted-nav">
+          <a href="about.html">
+            <h4 class="navTextBottom">about</h4>
+          </a>
+          <a href="contact.html">
+            <h4 class="navTextBottom">contact</h4>
+          </a>
+          <h4 class="navTextBottom">follow us:</h4>
+          <img class="socialIcon" src="images/Instagram.svg">
+          <img class="socialIcon" src="images/LinkedIn.svg">
+          <img class="socialIcon" src="images/GitHub.svg">
+          <img class="socialIcon" src="images/Pinterest.svg">
+          <h4 class="navTextBottom">Planpal app © 2024</h4>
+      </nav>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="contentOne">
+            <div class="titleSettings">
+              <h1 class="mainTitle">About</h1>
+            </div>
+            <hr class="dotted">
+          </div>
+          <div class="contentTwo">
+            <div class="heartStarCircleSection">
+              <img class="heartStarCircle" src="images/heart.svg">
+              <img class="heartStarCircle" src="images/star.svg">
+              <img class="heartStarCircle" src="images/circle.svg">
+            </div>
+          </div>
+        </div>
+        <div class="rowAbout">
+          <div class="about">
+            <h3 class="headingOne">Heading Two</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat est. Ullamcorper
+              malesuada proin libero nunc consequat interdum varius sit. Dictum fusce ut placerat orci nulla
+              pellentesque dignissim. Non diam phasellus vestibulum lorem. Fringilla phasellus faucibus scelerisque
+              eleifend donec pretium.</p>
+          </div>
+          <div class="aboutImg">
+            <img class="aboutImgOne" src="images/cupcakes.jpeg">
+          </div>
+        </div>
+        <div class="rowAboutTwo">
+          <div>
+            <img class="aboutTwoImg" src="images/cupcakes.jpeg">
+          </div>
+          <div class="about">
+            <h3 class="headingTwo">Heading Two</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat est. Ullamcorper
+              malesuada proin libero nunc consequat interdum varius sit. Dictum fusce ut placerat orci nulla
+              pellentesque dignissim. Non diam phasellus vestibulum lorem. Fringilla phasellus faucibus scelerisque
+              eleifend donec pretium. </p>
+            <button class="generalButton">Contact Us</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 `;

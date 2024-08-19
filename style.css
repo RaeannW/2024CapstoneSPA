@@ -371,3 +371,6 @@ input{
 .mainTitle{
   font-size: 4em;;
 }
+li{
+  list-style: none;
+}
