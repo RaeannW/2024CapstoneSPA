@@ -1,4 +1,5 @@
 import html from "html-literal";
+import themeButton from "../assets/img/sliders-solid.svg";
 
 export default () => html`
   <section>
@@ -50,7 +51,7 @@ export default () => html`
             <div class="titleSettings">
               <h1 class="mainTitle">Daily Planner</h1>
               <button id="themeButton">
-                <img src="images/sliders-solid.svg">
+                <img src="${themeButton}" alt="settings">
               </button>
             </div>
             <hr class="dotted">
