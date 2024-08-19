@@ -1,12 +1,14 @@
 import html from "html-literal";
-import dogpic from "../assets/img/dog-with-flower.jpg";
+import heart from "../assets/img/heart.svg";
+import star from "../assets/img/star.svg";
+import circle from "../assets/img/circle.svg";
 
 export default () => html`
   <section>
   <div class="outer">
       <div class="row">
         <div class="side">
-          <nav>
+          <!-- <nav>
             <i class="fas fa-bars"></i>
             <div class="hidden--mobile nav-links">
           <img id="logo" src="images/planPalLogo.png">
@@ -43,7 +45,7 @@ export default () => html`
           <img class="socialIcon" src="images/GitHub.svg">
           <img class="socialIcon" src="images/Pinterest.svg">
           <h4 class="navTextBottom">Planpal app © 2024</h4>
-      </nav>
+      </nav> -->
       </div>
       <div class="content">
         <div class="row">
@@ -54,11 +56,11 @@ export default () => html`
             <hr class="dotted">
           </div>
           <div class="contentTwo">
-            <div class="heartStarCircleSection">
-              <img class="heartStarCircle" src="images/heart.svg">
-              <img class="heartStarCircle" src="images/star.svg">
-              <img class="heartStarCircle" src="images/circle.svg">
-            </div>
+              <div class="heartStarCircleSection">
+                <img class="heartStarCircle" src="${heart}" alt="heart">
+                <img class="heartStarCircle" src="${star}" alt="star">
+                <img class="heartStarCircle" src="${circle}" alt="star">
+              </div>
           </div>
         </div>
         <div class="rowAbout">
