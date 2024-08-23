@@ -1,7 +1,12 @@
 import html from "html-literal";
 
-export default item => {
+export default (item) => {
   return html`
-    <li><a href="${item.url}" title="${item.text}" data-navigo>${item.text}</a></li>
+    <li class="subNavMain">
+      <span class="dot"></span>
+      <a href="${item.url}" data-navigo>
+        <h3 class="navText">${item.text}</h3>
+      </a>
+    </li>
   `;
 };

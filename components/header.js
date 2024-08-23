@@ -2,7 +2,7 @@ import html from "html-literal";
 
 export default state => html`
 
-  <div class="mainTitle">
-    <h1>${state.header}</h1>
-  </div>
+<div class="titleSettings">
+          <h1 class="mainTitle">${state.header}</h1>
+        </div>
 `;
