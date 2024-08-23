@@ -8,8 +8,6 @@ const router = new Navigo("/"); //creates new Navigo object
 
 function render(state = store.daily) {
   document.querySelector("#root").innerHTML = `
-      ${header(state)}
-      ${nav(store.nav)}
       ${main(state)}
     `;
 
