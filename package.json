@@ -19,6 +19,10 @@
     "process": "^0.11.10"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/list": "^6.1.15",
+    "@fullcalendar/timegrid": "^6.1.15",
     "axios": "^1.7.3",
     "dotenv": "^16.4.5",
     "html-literal": "^1.1.0",

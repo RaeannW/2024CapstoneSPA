@@ -1,5 +1,5 @@
 export default {
-    header: "Daily Planner",
-    view: "daily",
-    weather: {}
+  header: "Daily Planner",
+  view: "daily",
+  weather: {}
 };

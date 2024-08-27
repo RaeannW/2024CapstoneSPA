@@ -1,5 +1,5 @@
 export default {
-    header: "Monthly Planner",
-    view: "monthly",
-    weather: {}
+  header: "Monthly Planner",
+  view: "monthly",
+  weather: {}
 };
