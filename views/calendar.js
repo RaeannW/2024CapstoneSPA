@@ -17,29 +17,25 @@ export default state => html`
               <h2 class="regText">hello name</h2>
               <h2 class="date regText">date</h2>
             </div>
-            <div class="toDoList">
-              <h2>To Do List:</h2>
-              <p>Text Input</p>
-            </div>
           </div>
           <div class="contentTwo">
-            <div class="weather">
+          <div class="weather">
               <h2 class="weatherText">${state.weather.temp}°F</h2>
               <p>${state.weather.city}</p>
               <p class="weatherText">${state.weather.description}</p>
             </div>
-            <div class="goals">
-              <h2 class="noteHeader">Goals:</h2>
-              <p>Example Text Here</p>
-            </div>
-            <div class="notes">
-              <h2 class="noteHeader">Notes:</h2>
-              <p>Example Text Here</p>
-            </div>
+          </div>
+          <div class="calendar-container">
+            <div id="calendar"></div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- <div class="monthly-container">
+    <div id="monthly"></div> -->
+
+  </div>
   </div>
 </section>
 `;

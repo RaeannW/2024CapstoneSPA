@@ -1,9 +1,9 @@
 export default {
   top: [
     { url: "/name", text: "Name" },
-    { url: "/daily", text: "Daily" },
-    { url: "/weekly", text: "Weekly" },
-    { url: "/monthly", text: "Monthly" }
+    { url: "/notes", text: "Notes" },
+    { url: "/weather", text: "Weather" },
+    { url: "/calendar", text: "Calendar" }
   ],
   bottom: [
     { url: "/about", text: "About" },
