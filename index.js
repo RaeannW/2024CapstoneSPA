@@ -6,7 +6,7 @@ import axios from "axios";
 
 const router = new Navigo("/"); //creates new Navigo object
 
-function render(state = store.daily) {
+function render(state = store.notes) {
   document.querySelector("#root").innerHTML = `
       ${main(state)}
     `;
@@ -64,12 +64,12 @@ function afterRender(state) {
       axios
         .post(`${process.env.API_URL}/appointments`, requestData)
         .then(response => {
-          store.monthly.appointments.push(response.data);
+          store.calendar.appointments.push(response.data);
           console.log(
-            "matsinet-index.js:76-store.monthly.appointments:",
-            store.monthly.appointments
+            "matsinet-index.js:76-store.calendar.appointments:",
+            store.calendar.appointments
           );
-          router.navigate("/monthly");
+          router.navigate("/calendar");
         })
         .catch(error => {
           console.log("It puked", error);
@@ -77,9 +77,9 @@ function afterRender(state) {
     });
   }
 
-  if (state.view === "monthly") {
-    const monthlyEl = document.getElementById("monthly");
-    monthly = new Fullmonthly.monthly(monthlyEl, {
+  if (state.view === "calendar") {
+    const calendarEl = document.getElementById("calendar");
+    calendar = new Fullcalendar.calendar(calendarEl, {
       initialView: "dayGridMonth",
       headerToolbar: {
         left: "prev,next today",
@@ -129,19 +129,19 @@ function afterRender(state) {
               console.log(
                 `Event '${response.data.title}' (${response.data._id}) has been created.`
               );
-              monthly.addEvent(response.data);
-              monthly.unselect();
+              calendar.addEvent(response.data);
+              calendar.unselect();
             })
             .catch(error => {
               console.log("It puked", error);
             });
         } else {
-          monthly.unselect();
+          calendar.unselect();
         }
       },
       events: state.appointments || []
     });
-    monthly.render();
+    calendar.render();
   }
 
   if (state.view === "Appointments") {
@@ -159,7 +159,7 @@ function afterRender(state) {
             console.log(
               `Event '${response.data.title}' (${response.data._id}) has been deleted.`
             );
-            router.navigate("/monthly");
+            router.navigate("/calendar");
           })
           .catch(error => {
             console.log("It puked", error);
@@ -178,12 +178,12 @@ router.hooks({
   // https://github.com/krasimir/navigo/blob/master/DOCUMENTATION.md#match
   before: (done, match) => {
     // We need to know what view we are on to know what data to fetch
-    const view = match?.data?.view ? camelCase(match.data.view) : "daily";
+    const view = match?.data?.view ? camelCase(match.data.view) : "notes";
     // Add a switch case statement to handle multiple routes
     switch (view) {
       // Add a case for each view that needs data from an API
       // New Case for the Home View
-      case "daily":
+      case "notes":
         axios
           // Get request to retrieve the current weather data using the API key and providing a city name
           .get(
@@ -192,7 +192,7 @@ router.hooks({
           .then((response) => {
             // Create an object to be stored in the Home state from the response
             // Round Temp = Math.round();
-            store.daily.weather = {
+            store.notes.weather = {
               city: response.data.name,
               temp: Math.round(response.data.main.temp),
               feelsLike: response.data.main.feels_like,
@@ -205,7 +205,7 @@ router.hooks({
             done();
           });
         break;
-      case "monthly":
+      case "calendar":
         axios
           // Get request to retrieve the current weather data using the API key and providing a city name
           .get(
@@ -214,7 +214,7 @@ router.hooks({
           .then((response) => {
             // Create an object to be stored in the Home state from the response
             // Round Temp = Math.round();
-            store.monthly.weather = {
+            store.calendar.weather = {
               city: response.data.name,
               temp: Math.round(response.data.main.temp),
               feelsLike: response.data.main.feels_like,
@@ -230,7 +230,7 @@ router.hooks({
 
 
 
-        case "monthly":
+        case "calendar":
           axios
             .get(`${process.env.API_URL}/appointments`)
             .then(response => {
@@ -244,7 +244,7 @@ router.hooks({
                   allDay: event.allDay || false
                 };
               });
-              store.monthly.appointments = events;
+              store.calendar.appointments = events;
               done();
             })
             .catch(error => {
@@ -279,7 +279,7 @@ router.hooks({
     }
   },
   already: (match) => {
-    const view = match?.data?.view ? camelCase(match.data.view) : "daily";
+    const view = match?.data?.view ? camelCase(match.data.view) : "notes";
 
     render(store[view]);
   },
@@ -301,7 +301,7 @@ router
     // This reduces the number of checks that need to be performed
     ":view": (match) => {
       // Change the :view data element to camel case and remove any dashes (support for multi-word views)
-      const view = match?.data?.view ? camelCase(match.data.view) : "daily";
+      const view = match?.data?.view ? camelCase(match.data.view) : "notes";
       // Determine if the view name key exists in the store object
       if (view in store) {
         render(store[view]);
