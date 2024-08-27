@@ -19,8 +19,7 @@ body{
 }
 .side{
   flex: 20%;
-  /* background-color: #f1f1f1; */
-  padding: 20px;
+  padding: 0px;
 }
 .dotted-nav{
   margin-top: 100px;
@@ -72,6 +71,10 @@ h2{
 .subNavMain{
   display: flex;
 }
+.socialIconRow{
+  display: flex;
+  align-items: baseline;
+}
 .navText{
   font-family: "Poppins", sans-serif;
   font-weight: 400;
@@ -96,7 +99,7 @@ h2{
 }
 .socialIcon{
   width: 15px;
-  margin-right: 10px;
+  margin-left: 10px;
 }
 .regText{
   font-family: "Poppins", sans-serif;
@@ -115,7 +118,6 @@ h2{
 .dotted{
   border-top: 2px dashed black;
   margin: 20px;
-
 }
 .greetingDate{
   display: flex;
@@ -274,6 +276,13 @@ input{
   border: solid 1px black;
   margin: 20px 0;
 }
+form input { 
+  margin-bottom: 10px; 
+}
+form #message {
+  width:300px;
+  height:150px;
+}
 @media (min-width: 550px) {
   nav > .fa-bars {
     display: none;
@@ -369,8 +378,15 @@ input{
   }
 }
 .mainTitle{
-  font-size: 4em;;
+  font-size: 3.5em;
+  padding: 0;
 }
 li{
   list-style: none;
+}
+.calendar-container {
+  width: 95%;
+  height: calc(85vh - 85px);
+  margin-left: auto;
+  margin-right: auto;
 }
