@@ -5,7 +5,7 @@ import navItemBottom from "./navItemBottom.js";
 import logo from "../assets/img/planPalLogo.png";
 import instagram from "../assets/img/Instagram.svg";
 import linkedin from "../assets/img/LinkedIn.svg";
-import github from "../assets/img/github.svg";
+import github from "../assets/img/GitHub.svg";
 import pin from "../assets/img/Pinterest.svg";
 
 // constructing an HTML list of items from the array in Store
