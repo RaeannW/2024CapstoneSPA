@@ -6,7 +6,7 @@ import logo from "../assets/img/planPalLogo.png";
 import instagram from "../assets/img/Instagram.svg";
 import linkedin from "../assets/img/LinkedIn.svg";
 import github from "../assets/img/GitHub.svg";
-import pinterest from "../assets/img/Pinterest.svg";
+import pin from "../assets/img/Pinterest.svg";
 
 // constructing an HTML list of items from the array in Store
 //  - .map formats the array elements into html
@@ -34,7 +34,7 @@ export default state => {
           <li><img class="socialIcon" src="${instagram}" /></li>
           <li><img class="socialIcon" src="${linkedin}" /></li>
           <li><img class="socialIcon" src="${github}" /></li>
-          <li><img class="socialIcon" src="${pinterest}" /></li>
+          <li><img class="socialIcon" src="${pin}" /></li>
         </div>
         <h4 class="navTextBottom">Planpal app © 2024</h4>
       </nav>
