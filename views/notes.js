@@ -25,7 +25,14 @@ export default state => html`
                 <input type="text" id="input-box" placeholder="Add Your Text">
                 <button class="toDoButtonOne" id="addTaskButton">+</button>
               </div>
-              <ul id="list-container">
+              <ul id="todo-list-container">
+                ${state.toDos
+                  .map(todo => {
+                    return html`
+                      <li>${todo.task}<span>×</span></li>
+                    `;
+                  })
+                  .join("")}
               </ul>
             </div>
           </div>
@@ -42,7 +49,7 @@ export default state => html`
                   <input type="text" id="input-box-two" placeholder="Add Your Text">
                   <button class="goalsButton" id="addGoalsButton">+</button>
                   </div>
-                  <ul id="list-container-two">
+                  <ul id="goals-list-container">
                   </ul>
               </div>
   </div>

@@ -1,5 +1,7 @@
 export default {
   header: "Notes",
   view: "notes",
-  weather: {}
+  weather: {},
+  toDos: [],
+  goals: []
 };
