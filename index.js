@@ -50,11 +50,12 @@ router.hooks({
             };
             done();
             
-            //Where to add notes functionality??
+            //Add Tasks to To Do List
             const inputBox = document.getElementById("input-box");
             const listContainer = document.getElementById("list-container");
 
             function addTask() {
+              console.log("test");
               if (inputBox.value === "") {
                 alert("You Must Write Something");
               } else {
@@ -67,13 +68,16 @@ router.hooks({
               }
               inputBox.value = "";
 
-              //getting message that says addTask is not defined - tried to invoke function with store.notes but that did not work
-              addTask(store.notes);
-
               //saveData function called to recall data
               saveData();
             }
             
+            //Task Button
+            const addButton = document.getElementById("addTaskButton");
+            if (addButton){
+              addButton.addEventListener("click", addTask);
+            }          
+
             listContainer.addEventListener(
               "click",
               function(e) {
@@ -90,7 +94,7 @@ router.hooks({
               false
             );
             
-            //save data
+            //save task data
             function saveData(){
               localStorage.setItem("data", listContainer.innerHTML);
             }
@@ -98,6 +102,61 @@ router.hooks({
               listContainer.innerHTML = localStorage.getItem("data");
             }
             showTask();
+
+            //Add Goals List
+            const inputBoxTwo = document.getElementById("input-box-two");
+            const listContainerTwo = document.getElementById("list-container-two");
+
+            function addGoals() {
+              console.log("test");
+              if (inputBoxTwo.value === "") {
+                alert("You Must Write Something");
+              } else {
+                let li = document.createElement("li");
+                li.innerHTML = inputBoxTwo.value;
+                listContainerTwo.appendChild(li);
+                let span = document.createElement("span");
+                span.innerHTML = "\u00d7";
+                li.appendChild(span);
+              }
+              inputBoxTwo.value = "";
+
+              //saveData function called to recall data
+              saveGoalsData();
+            }            
+
+            //Goals Button
+            const addGoalsButton = document.getElementById("addGoalsButton");
+            if (addGoalsButton){
+              addGoalsButton.addEventListener("click", addGoals);
+            }  
+
+            listContainerTwo.addEventListener(
+              "click",
+              function(e) {
+                if (e.target.tagName === "LI") {
+                  e.target.classList.toggle("checked");
+                  //saveGoalsData function
+                  saveGoalsData();
+                } else if (e.target.tagName === "SPAN") {
+                  e.target.parentElement.remove();
+                  //saveGoalsData function
+                  saveGoalsData();
+                }
+              },
+              false
+            ); 
+            
+            //save goals data
+            function saveGoalsData(){
+              localStorage.setItem("data", listContainerTwo.innerHTML);
+            }
+            function showGoals(){
+              listContainerTwo.innerHTML = localStorage.getItem("data");
+            }
+            showGoals();        
+
+
           })
           .catch((err) => {
             console.log(err);

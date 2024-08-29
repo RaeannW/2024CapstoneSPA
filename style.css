@@ -156,21 +156,19 @@ h2{
 .goals{
   background-color: white;
   padding: 10px;
+  padding-bottom: 108px;
   border-radius: 5px;
   border: 2px solid black;
   line-height: 10px;
   margin-top: 10px;
   margin: 20px;
 }
-.notes{
-  background-color: rgb(234, 234, 234);
-  padding: 10px;
-  border-radius: 5px;
-  border: 2px solid black;
-  line-height: 10px;
-  margin-top: 10px;
-  margin: 20px;
+@media (min-width: 1800px) {
+  .goals {
+    padding-bottom: 150px;
+  }
 }
+
 .heartStarCircleSection{
   padding: 5px;
   text-align: center;
@@ -374,6 +372,7 @@ form #message {
     line-height: 30px;;
   }
 }
+
 .mainTitle{
   font-size: 3.5em;
   padding: 0;
@@ -451,6 +450,91 @@ li{
   border-radius: 50%;
 }
 #list-container li span:hover{
+  background: #edeef0;
+}
+
+/* Goals List */
+.goalsRow{
+  display: flex;
+  border-radius: 30px;
+  padding-left: 10px;
+  margin: 10px;
+  background-color: rgb(243, 243, 243);
+}
+@media (max-width: 1800px) {
+  .goalsRow{
+    display: inline-block;
+    border-radius: 30px;
+    padding-left: 10px;
+    margin: 10px; 
+  }
+}
+.goalsButton{
+  border: none;
+  outline: none;
+  padding: 20px 25px;
+  margin-left: 105px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+}
+@media (max-width: 1800px) {
+  .goalsButton{
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    float: right;
+  }
+}
+#input-box-two{
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px;
+}
+@media (max-width: 1800px) {
+  #input-box-two{
+    border: none;
+    outline: none;
+  }
+}
+#list-container-two li {
+  padding: 12px 8px 12px 50px;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+#list-container-two li::before{
+  content: '';
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-image: url(assets/img/unchecked.svg);
+  background-size: cover;
+  background-position: center;
+  top: 12px;
+  left: 8px;
+}
+#list-container-two li.checked{
+  text-decoration: line-through;
+}
+#list-container-two li.checked::before{
+  background-image: url(assets/img/checked.svg);
+}
+#list-container-two li span{
+  position: absolute;
+  right: 0;
+  top: 5px;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+}
+#list-container-two li span:hover{
   background: #edeef0;
 }
 
