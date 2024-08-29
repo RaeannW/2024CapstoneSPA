@@ -1,10 +1,10 @@
-import { header, main, nav} from "./components";
+import { header, main, nav } from "./components";
 import * as store from "./store";
 import Navigo from "navigo";
-import { Calendar } from '@fullcalendar/core';
-import interactionPlugin from '@fullcalendar/interaction';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
+import { Calendar } from "@fullcalendar/core";
+import interactionPlugin from "@fullcalendar/interaction";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
 import { camelCase } from "lodash";
 import axios from "axios";
 
@@ -19,9 +19,6 @@ function render(state = store.notes) {
 }
 //invoke render inside router method (after router is set up)
 
-
-
-
 router.hooks({
   // We pass in the `done` function to the before hook handler to allow the function to tell Navigo we are finished with the before hook.
   // The `match` parameter is the data that is passed from Navigo to the before hook handler with details about the route being accessed.
@@ -34,136 +31,150 @@ router.hooks({
       // Add a case for each view that needs data from an API
       // New Case for the Home View
       case "notes":
-        axios
+        const weatherRequest = axios
           // Get request to retrieve the current weather data using the API key and providing a city name
           .get(
             `https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&units=imperial&q=st%20louis`
-          )
-          .then((response) => {
+          );
+        const toDoRequest = axios
+          // Get request to retrieve the current weather data using the API key and providing a city name
+          .get(
+            `${process.env.PLANPAL_API_URL}/tasks`
+          );
+        // const goalsRequest = axios
+        //   // Get request to retrieve the current weather data using the API key and providing a city name
+        //   .get(
+        //     `${process.env.PLANPAL_API_URL}/goals`
+        //   )
+
+        Promise.allSettled([weatherRequest, toDoRequest])
+          .then((responses) => {
+            const [weatherResponse, toDoResponse] = responses;
             // Create an object to be stored in the Home state from the response
             // Round Temp = Math.round();
             store.notes.weather = {
-              city: response.data.name,
-              temp: Math.round(response.data.main.temp),
-              feelsLike: response.data.main.feels_like,
-              description: response.data.weather[0].main,
+              city: weatherResponse.value.data.name,
+              temp: Math.round(weatherResponse.value.data.main.temp),
+              feelsLike: weatherResponse.value.data.main.feels_like,
+              description: weatherResponse.value.data.weather[0].main,
             };
-            done();
-            
-            //Add Tasks to To Do List
-            const inputBox = document.getElementById("input-box");
-            const listContainer = document.getElementById("list-container");
 
-            function addTask() {
-              console.log("test");
-              if (inputBox.value === "") {
-                alert("You Must Write Something");
-              } else {
-                let li = document.createElement("li");
-                li.innerHTML = inputBox.value;
-                listContainer.appendChild(li);
-                let span = document.createElement("span");
-                span.innerHTML = "\u00d7";
-                li.appendChild(span);
-              }
-              inputBox.value = "";
+            store.notes.toDos = toDoResponse.value.data;
 
-              //saveData function called to recall data
-              saveData();
-            }
-            
-            //Task Button
-            const addButton = document.getElementById("addTaskButton");
-            if (addButton){
-              addButton.addEventListener("click", addTask);
-            }          
-
-            listContainer.addEventListener(
-              "click",
-              function(e) {
-                if (e.target.tagName === "LI") {
-                  e.target.classList.toggle("checked");
-                  //saveData function
-                  saveData();
-                } else if (e.target.tagName === "SPAN") {
-                  e.target.parentElement.remove();
-                  //saveData function
-                  saveData();
-                }
-              },
-              false
-            );
-            
-            //save task data
-            function saveData(){
-              localStorage.setItem("data", listContainer.innerHTML);
-            }
-            function showTask(){
-              listContainer.innerHTML = localStorage.getItem("data");
-            }
-            showTask();
-
-            //Add Goals List
-            const inputBoxTwo = document.getElementById("input-box-two");
-            const listContainerTwo = document.getElementById("list-container-two");
-
-            function addGoals() {
-              console.log("test");
-              if (inputBoxTwo.value === "") {
-                alert("You Must Write Something");
-              } else {
-                let li = document.createElement("li");
-                li.innerHTML = inputBoxTwo.value;
-                listContainerTwo.appendChild(li);
-                let span = document.createElement("span");
-                span.innerHTML = "\u00d7";
-                li.appendChild(span);
-              }
-              inputBoxTwo.value = "";
-
-              //saveData function called to recall data
-              saveGoalsData();
-            }            
-
-            //Goals Button
-            const addGoalsButton = document.getElementById("addGoalsButton");
-            if (addGoalsButton){
-              addGoalsButton.addEventListener("click", addGoals);
-            }  
-
-            listContainerTwo.addEventListener(
-              "click",
-              function(e) {
-                if (e.target.tagName === "LI") {
-                  e.target.classList.toggle("checked");
-                  //saveGoalsData function
-                  saveGoalsData();
-                } else if (e.target.tagName === "SPAN") {
-                  e.target.parentElement.remove();
-                  //saveGoalsData function
-                  saveGoalsData();
-                }
-              },
-              false
-            ); 
-            
-            //save goals data
-            function saveGoalsData(){
-              localStorage.setItem("data", listContainerTwo.innerHTML);
-            }
-            function showGoals(){
-              listContainerTwo.innerHTML = localStorage.getItem("data");
-            }
-            showGoals();        
-
-
-          })
-          .catch((err) => {
-            console.log(err);
             done();
           });
-        break;
 
+            // //Add Tasks to To Do List
+            // const inputBox = document.getElementById("input-box");
+            // const listContainer = document.getElementById("list-container");
+
+            // function addTask() {
+            //   console.log("test");
+            //   if (inputBox.value === "") {
+            //     alert("You Must Write Something");
+            //   } else {
+            //     let li = document.createElement("li");
+            //     li.innerHTML = inputBox.value;
+            //     listContainer.appendChild(li);
+            //     let span = document.createElement("span");
+            //     span.innerHTML = "\u00d7";
+            //     li.appendChild(span);
+            //   }
+            //   inputBox.value = "";
+
+            //   //saveData function called to recall data
+            //   saveData();
+            // }
+
+            // //Task Button
+            // const addButton = document.getElementById("addTaskButton");
+            // if (addButton){
+            //   addButton.addEventListener("click", addTask);
+            // }
+
+            // listContainer.addEventListener(
+            //   "click",
+            //   function(e) {
+            //     if (e.target.tagName === "LI") {
+            //       e.target.classList.toggle("checked");
+            //       //saveData function
+            //       saveData();
+            //     } else if (e.target.tagName === "SPAN") {
+            //       e.target.parentElement.remove();
+            //       //saveData function
+            //       saveData();
+            //     }
+            //   },
+            //   false
+            // );
+
+            // //save task data
+            // function saveData(){
+            //   localStorage.setItem("data", listContainer.innerHTML);
+            // }
+            // function showTask(){
+            //   listContainer.innerHTML = localStorage.getItem("data");
+            // }
+            // showTask();
+
+            // //Add Goals List
+            // const inputBoxTwo = document.getElementById("input-box-two");
+            // const listContainerTwo = document.getElementById("list-container-two");
+
+            // function addGoals() {
+            //   console.log("test");
+            //   if (inputBoxTwo.value === "") {
+            //     alert("You Must Write Something");
+            //   } else {
+            //     let li = document.createElement("li");
+            //     li.innerHTML = inputBoxTwo.value;
+            //     listContainerTwo.appendChild(li);
+            //     let span = document.createElement("span");
+            //     span.innerHTML = "\u00d7";
+            //     li.appendChild(span);
+            //   }
+            //   inputBoxTwo.value = "";
+
+            //   //saveData function called to recall data
+            //   saveGoalsData();
+            // }
+
+            // //Goals Button
+            // const addGoalsButton = document.getElementById("addGoalsButton");
+            // if (addGoalsButton){
+            //   addGoalsButton.addEventListener("click", addGoals);
+            // }
+
+            // listContainerTwo.addEventListener(
+            //   "click",
+            //   function(e) {
+            //     if (e.target.tagName === "LI") {
+            //       e.target.classList.toggle("checked");
+            //       //saveGoalsData function
+            //       saveGoalsData();
+            //     } else if (e.target.tagName === "SPAN") {
+            //       e.target.parentElement.remove();
+            //       //saveGoalsData function
+            //       saveGoalsData();
+            //     }
+            //   },
+            //   false
+            // );
+
+            // //save goals data
+            // function saveGoalsData(){
+            //   localStorage.setItem("data", listContainerTwo.innerHTML);
+            // }
+            // function showGoals(){
+            //   listContainerTwo.innerHTML = localStorage.getItem("data");
+            // }
+            // showGoals();
+          // })
+          // .catch((err) => {
+          //   console.log(err);
+          //   done();
+          // });
+        break;
 
       case "calendar":
         axios
@@ -200,8 +211,6 @@ router.hooks({
   after: (match) => {
     const view = match?.data?.view ? camelCase(match.data.view) : "notes";
 
-    router.updatePageLinks();
-
     if (view === "calendar") {
       const calendarEl = document.getElementById("calendar");
       calendar = new FullCalendar.Calendar(calendarEl, {
@@ -209,14 +218,14 @@ router.hooks({
         headerToolbar: {
           left: "prev,next today",
           center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay"
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
         },
         buttonText: {
           today: "Today",
           month: "Month",
           week: "Week",
           day: "Day",
-          list: "List"
+          list: "List",
         },
         height: "100%",
         dayMaxEventRows: true,
@@ -233,38 +242,38 @@ router.hooks({
         eventResize: function(info) {
           handleEventDragResize(info);
         },
-        select: info => {
+        select: (info) => {
           const title = prompt("Please enter a title");
-  
-          // if (title) {
-          //   const requestData = {
-          //     title: title,
-          //     start: info.start.toJSON(),
-          //     end: info.end.toJSON(),
-          //     allDay: info.view.type === "dayGridMonth"
-          //   };
-  
-          //   axios
-          //     .post(`${process.env.API_URL}/appointments`, requestData)
-          //     .then(response => {
-          //       // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-          //       response.data.title = response.data.title;
-          //       response.data.url = `/appointments/${response.data._id}`;
-          //       store.Appointments.appointments.push(response.data);
-          //       console.log(
-          //         `Event '${response.data.title}' (${response.data._id}) has been created.`
-          //       );
-          //       calendar.addEvent(response.data);
-          //       calendar.unselect();
-          //     })
-          //     .catch(error => {
-          //       console.log("It puked", error);
-          //     });
-          // } else {
-          //   calendar.unselect();
-          // }
+
+          if (title) {
+            const requestData = {
+              title: title,
+              start: info.start.toJSON(),
+              end: info.end.toJSON(),
+              allDay: info.view.type === "dayGridMonth",
+            };
+
+            axios
+              .post(`${process.env.PLANPAL_API_URL}/events`, requestData)
+              .then((response) => {
+                // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
+                response.data.title = response.data.title;
+                response.data.url = `/events/${response.data._id}`;
+                store.Appointments.appointments.push(response.data);
+                console.log(
+                  `Event '${response.data.title}' (${response.data._id}) has been created.`
+                );
+                calendar.addEvent(response.data);
+                calendar.unselect();
+              })
+              .catch((error) => {
+                console.log("It puked", error);
+              });
+          } else {
+            calendar.unselect();
+          }
         },
-        events: state.appointments || []
+        events: store.calendar.events || [],
       });
       calendar.render();
     }
@@ -273,10 +282,9 @@ router.hooks({
     // document.querySelector(".fa-bars").addEventListener("click", () => {
     //   document.querySelector("nav > ul").classList.toggle("hidden--mobile");
     // });
+    router.updatePageLinks();
   },
 });
-
-
 
 router
   .on({
