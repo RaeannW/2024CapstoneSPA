@@ -23,10 +23,9 @@ export default state => html`
               <h2 class="toDoHeader">To Do List:</h2>
               <div class="toDoRow">
                 <input type="text" id="input-box" placeholder="Add Your Text">
-                <button class="toDoButtonOne" onclick=addTask()>+</button>
+                <button class="toDoButtonOne" id="addTaskButton">+</button>
               </div>
               <ul id="list-container">
-                <li>Task</li>
               </ul>
             </div>
           </div>
@@ -36,18 +35,16 @@ export default state => html`
               <p>${state.weather.city}</p>
               <p class="weatherText">${state.weather.description}</p>
             </div>
-            <div class="goals">
-              <h2 class="noteHeader">Goals:</h2>
-              <p>Example Text Here</p>
-            </div>
-            <div class="notes">
-              <h2 class="noteHeader">Notes:</h2>
-              <p>Example Text Here</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+              <div class="goals">
+                <h2 class="toDoHeader">Goals:</h2>
+                <div class="goalsRow">
+                  <input type="text" id="input-box-two" placeholder="Add Your Text">
+                  <button class="goalsButton" id="addGoalsButton">+</button>
+                  </div>
+                  <ul id="list-container-two">
+                  </ul>
+              </div>
   </div>
 </section>
 `;
