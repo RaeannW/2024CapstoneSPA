@@ -36,10 +36,10 @@ router.hooks({
           .get(
             `https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&units=imperial&q=st%20louis`
           );
-        const toDoRequest = axios
+          const toDoRequest = axios
           // Get request to retrieve the current weather data using the API key and providing a city name
           .get(
-            `${process.env.PLANPAL_API_URL}/tasks`
+            `${process.env.PLANPAL_API_URL}/todo`
           );
         // const goalsRequest = axios
         //   // Get request to retrieve the current weather data using the API key and providing a city name
@@ -206,10 +206,123 @@ router.hooks({
   },
   already: (match) => {
     const view = match?.data?.view ? camelCase(match.data.view) : "notes";
-    render(state.view);
+    render(store[view]);
   },
   after: (match) => {
     const view = match?.data?.view ? camelCase(match.data.view) : "notes";
+    if (view === "notes"){
+      document.getElementById("addTaskButton").addEventListener("click", event => {
+        event.preventDefault();
+        console.log("I was clicked");
+        const newToDo = document.getElementById("input-box").value;
+        const requestData = {
+          task: newToDo,
+        }
+
+        // Get the element
+        console.log("Input Element List", newToDo);
+        axios
+        .post(`${process.env.PLANPAL_API_URL}/toDo`, requestData)
+        .then(response => {
+          store.notes.toDos.push(response.data);
+          router.navigate("/notes");
+        })
+        .catch(error => {
+          console.log("It puked", error);
+        });
+      });
+
+      Array.from(document.getElementsByClassName("delete")).forEach(button => {
+        button.addEventListener("click", event => {
+          event.preventDefault();
+  
+          const todoId = event.target.dataset.id;
+          const todoTask = event.target.dataset.task;
+          const todoIndex = event.target.dataset.index;
+
+          if (confirm(`Are you sure you want to delete this task ${todoTask}?`)) {
+            axios
+              .delete(`${process.env.PLANPAL_API_URL}/toDo/${todoId}`)
+              .then(response => {
+                // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+                store.notes.toDos.splice(todoIndex, 1);
+                router.navigate("/notes");
+              })
+              .catch(error => {
+                console.log("It puked", error);
+              });
+          }
+        });
+      });
+    }
+
+    //CONTACT FORM
+    if (view === "contact") {
+      // Add an event handler for the submit button on the form
+      document.querySelector("form").addEventListener("submit", event => {
+        event.preventDefault();
+    
+        // Get the form element
+        const inputList = event.target.elements;
+        console.log("Input Element List", inputList);
+    
+        // Create a request body object to send to the API
+        const requestData = {
+          firstName: inputList.fname.value,
+          lastName: inputList.lname.value,
+          email: inputList.email.value,
+          message: inputList.message.value,
+        };
+        // Log the request body to the console
+        console.log("request Body", requestData);
+    
+        axios
+          // Make a POST request to the API to create a message
+          .post(`${process.env.PLANPAL_API_URL}/contact`, requestData)
+          // If there is an error log it to the console
+          .catch(error => {
+            console.log("It puked", error);
+          });
+      });
+    }
+
+    
+    //NAME - SHOWS NAME ON OTHER PAGES
+    if (view === "profile") {
+      // Add an event handler for the submit button on the form
+      document.querySelector("form").addEventListener("submit", event => {
+        event.preventDefault();
+    
+        // Get the form element
+        const inputList = event.target.element;
+        console.log("Input Element List", inputList);
+    
+        // Create a request body object to send to the API
+        const requestData = {
+          username: inputList.username.value,
+        };
+        // Log the request body to the console
+        console.log("request Body", requestData);
+    
+        axios
+        // Make a POST request to the API to create a new pizza
+        .post(`${process.env.PLANPAL_API_URL}/username`, requestData)
+        .then((response) => {
+          // Create an object to be stored in the Home state from the response
+          store.profile.username = {
+            username: response.data.username,
+          };
+          done();
+        })
+        .catch((err) => {
+          console.log(err);
+          done();
+        });
+    });
+  }
+    
+
+//CALENDAR
 
     if (view === "calendar") {
       const calendarEl = document.getElementById("calendar");

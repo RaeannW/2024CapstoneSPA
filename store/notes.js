@@ -3,5 +3,6 @@ export default {
   view: "notes",
   weather: {},
   toDos: [],
-  goals: []
+  goals: [],
+  username: {}
 };

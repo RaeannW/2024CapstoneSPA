@@ -27,9 +27,20 @@ export default state => html`
               </div>
               <ul id="todo-list-container">
                 ${state.toDos
-                  .map(todo => {
+                  .map((todo, index) => {
                     return html`
-                      <li>${todo.task}<span>×</span></li>
+                      <li id="${todo.id}">
+                        ${todo.task}<span
+                          ><button
+                            class="delete"
+                            data-id="${todo._id}"
+                            data-index="${index}"
+                            data-task="${todo.task}"
+                          >
+                            ×
+                          </button></span
+                        >
+                      </li>
                     `;
                   })
                   .join("")}
