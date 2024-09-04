@@ -31,10 +31,28 @@ export default state => {
         </ul>
         <div class="socialIconRow">
           <li><h4 class="navTextBottom">follow us:</h4></li>
-          <li><img class="socialIcon" src="${instagram}" /></li>
-          <li><img class="socialIcon" src="${linkedin}" /></li>
-          <li><img class="socialIcon" src="${github}" /></li>
-          <li><img class="socialIcon" src="${pin}" /></li>
+          <li>
+            <a href="https://www.instagram.com/raedoesdoodles/" target="_blank"
+              ><img class="socialIcon" src="${instagram}"
+            /></a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/rae-wiechens-12113615b/"
+              target="_blank"
+              ><img class="socialIcon" src="${linkedin}"
+            /></a>
+          </li>
+          <li>
+            <a href="https://github.com/RaeannW" target="_blank"
+              ><img class="socialIcon" src="${github}"
+            /></a>
+          </li>
+          <li>
+            <a href="https://www.pinterest.com/raedoesdoodles/" target="_blank"
+              ><img class="socialIcon" src="${pin}"
+            /></a>
+          </li>
         </div>
         <h4 class="navTextBottom">Planpal app © 2024</h4>
       </nav>

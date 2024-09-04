@@ -1,6 +1,6 @@
 export default {
   top: [
-    { url: "/name", text: "Name" },
+    { url: "/profile", text: "Profile" },
     { url: "/notes", text: "Notes" },
     { url: "/weather", text: "Weather" },
     { url: "/calendar", text: "Calendar" }
