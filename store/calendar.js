@@ -2,5 +2,7 @@ export default {
   header: "Calendar",
   view: "calendar",
   weather: {},
-  events: []
+  events: [],
+  username: {},
+  date: new Date()
 };

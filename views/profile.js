@@ -13,8 +13,8 @@ export default state => html`
       </div>
     </div>
     <div class="greetingDate">
-      <h2 class="regText">hello name</h2>
-      <h2 class="date regText">date</h2>
+    <h2 class="regText">hello name</h2>
+    <h2 class="date regText">day: ${state.date.toString().split(" ")[0]}</h2>
     </div>
     <div class="rowAbout">
       <div class="about">

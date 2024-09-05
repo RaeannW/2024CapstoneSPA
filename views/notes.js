@@ -17,7 +17,9 @@ export default state => html`
             <hr class="dotted"/>
             <div class="greetingDate">
               <h2 class="regText">hello name</h2>
-              <h2 class="date regText">date</h2>
+              <h2 class="date regText">day: ${
+                state.date.toString().split(" ")[0]
+              }</h2>
             </div>
             <div class="toDoList">
               <h2 class="toDoHeader">To Do List:</h2>
@@ -30,16 +32,14 @@ export default state => html`
                   .map((todo, index) => {
                     return html`
                       <li id="${todo.id}">
-                        ${todo.task}<span
-                          ><button
-                            class="delete"
-                            data-id="${todo._id}"
-                            data-index="${index}"
-                            data-task="${todo.task}"
-                          >
-                            ×
-                          </button></span
+                        ${todo.task}<button
+                          class="delete"
+                          data-id="${todo._id}"
+                          data-index="${index}"
+                          data-task="${todo.task}"
                         >
+                          ×
+                        </button>
                       </li>
                     `;
                   })
