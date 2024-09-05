@@ -206,7 +206,56 @@ router.hooks({
   },
   already: (match) => {
     const view = match?.data?.view ? camelCase(match.data.view) : "notes";
+
     render(store[view]);
+
+    //Runs After Render Code
+    if (view === "notes"){
+      document.getElementById("addTaskButton").addEventListener("click", event => {
+        event.preventDefault();
+        console.log("I was clicked");
+        const newToDo = document.getElementById("input-box").value;
+        const requestData = {
+          task: newToDo,
+        }
+
+        // Get the element
+        console.log("Input Element List", newToDo);
+        axios
+        .post(`${process.env.PLANPAL_API_URL}/toDo`, requestData)
+        .then(response => {
+          store.notes.toDos.push(response.data);
+          router.navigate("/notes");
+        })
+        .catch(error => {
+          console.log("It puked", error);
+        });
+      });
+
+      Array.from(document.getElementsByClassName("delete")).forEach(button => {
+        console.log("Button.ID", button);
+        button.addEventListener("click", event => {
+          event.preventDefault();
+  
+          const todoId = event.target.dataset.id;
+          const todoTask = event.target.dataset.task;
+          const todoIndex = event.target.dataset.index;
+
+          if (confirm(`Are you sure you want to delete this task ${todoTask}?`)) {
+            axios
+              .delete(`${process.env.PLANPAL_API_URL}/toDo/${todoId}`)
+              .then(response => {
+                // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+                store.notes.toDos.splice(todoIndex, 1);
+                router.navigate("/notes");
+              })
+              .catch(error => {
+                console.log("It puked", error);
+              });
+          }
+        });
+      });
+    }
   },
   after: (match) => {
     const view = match?.data?.view ? camelCase(match.data.view) : "notes";
