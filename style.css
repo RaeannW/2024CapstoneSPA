@@ -402,7 +402,7 @@ li{
   background: transparent;
   padding: 10px;
 }
-.toDoButtonOne{
+.toDoButton{
   border: none;
   outline: none;
   padding: 20px 25px;
@@ -410,6 +410,9 @@ li{
   color: white;
   cursor: pointer;
   border-radius: 50%;
+}
+.toDoButton:hover{
+  background-color: rgb(196, 196, 196);
 }
 #list-container li {
   padding: 12px 8px 12px 50px;
@@ -474,6 +477,9 @@ li{
   cursor: pointer;
   border-radius: 50%;
 }
+.goalsButton:hover{
+  background-color: rgb(196, 196, 196);
+}
 @media (max-width: 1800px) {
   .goalsButton{
     border: none;
@@ -533,6 +539,18 @@ li{
   background: #edeef0;
 }
 
+/* Delete Button for To-Dos and Goals */
+.delete {
+  border: none;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  margin-left: 10px;
+}
+.delete:hover{
+  background-color: rgb(196, 196, 196);
+}
+
 /* Calendar: */
 .calendar-container {
   width: 95%;
@@ -542,6 +560,7 @@ li{
   background-color: grey;
 }
 
+/* Links: */
 a, a:visited, a:hover {
   color: inherit;
 }

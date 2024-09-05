@@ -206,8 +206,11 @@ router.hooks({
   },
   already: (match) => {
     const view = match?.data?.view ? camelCase(match.data.view) : "notes";
+
+    render(store[view]);
+
+    //Runs After Render Code
     if (view === "notes"){
-      console.log("Inside Already Hook for Notes View");
       document.getElementById("addTaskButton").addEventListener("click", event => {
         event.preventDefault();
         console.log("I was clicked");
@@ -253,7 +256,6 @@ router.hooks({
         });
       });
     }
-    render(store[view]);
   },
   after: (match) => {
     const view = match?.data?.view ? camelCase(match.data.view) : "notes";

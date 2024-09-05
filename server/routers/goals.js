@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ToDo from "../models/Goals.js";
+import Goals from "../models/Goals.js";
 
 const router = Router();
 
@@ -42,7 +42,7 @@ router.get("/", async (request, response) => {
 // Delete a todo task by ID
 router.delete("/:id", async (request, response) => {
   try {
-    const data = await ToDo.findByIdAndDelete(request.params.id, {});
+    const data = await Goals.findByIdAndDelete(request.params.id, {});
 
     response.json(data);
   } catch (error) {

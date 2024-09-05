@@ -24,8 +24,8 @@ export default state => html`
             <div class="toDoList">
               <h2 class="toDoHeader">To Do List:</h2>
               <div class="toDoRow">
-                <input type="text" id="input-box" placeholder="Add Your Text">
-                <button class="toDoButtonOne" id="addTaskButton">+</button>
+                <input type="text" id="input-box" placeholder="Add Your Text" input="required">
+                <button class="toDoButton" id="addTaskButton">+</button>
               </div>
               <ul id="todo-list-container">
                 ${state.toDos
