@@ -96,6 +96,8 @@ h2{
   font-weight: 400;
   font-style: normal;
   font-size: 14px;
+  margin-left: 40px;
+  line-height: 2px;
 }
 .socialIcon{
   width: 15px;
@@ -206,6 +208,13 @@ h2{
   width: auto;
   height: 250px;
 }
+@media (max-width: 400px) {
+  .aboutImg{
+    padding: 20px;
+    width: auto;
+    height: 150px;
+  }
+}
 .aboutImgTwo{
   padding: 20px;
   width: auto;
@@ -272,6 +281,11 @@ form input {
 form #message {
   width:300px;
   height:150px;
+}
+@media (min-width: 1073px) {
+  .fa-bars {
+    display: none !important;;
+  }
 }
 @media (min-width: 550px) {
   nav > .fa-bars {
@@ -550,6 +564,16 @@ li{
 .delete:hover{
   background-color: rgb(196, 196, 196);
 }
+.deleteGoalsButton {
+  border: none;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  margin-left: 10px;
+}
+.deleteGoalsButton:hover{
+  background-color: rgb(196, 196, 196);
+}
 
 /* Calendar: */
 .calendar-container {
@@ -563,4 +587,19 @@ li{
 /* Links: */
 a, a:visited, a:hover {
   color: inherit;
+}
+
+@media (max-width: 470px) {
+ div.contact{
+ width: 50%;
+  }
+}
+@media (max-width: 470px) {
+  textarea#message{
+  width: 100%;
+   }
+ }
+
+.greetingText{
+color: rgb(119, 119, 119);
 }

@@ -1,5 +1,5 @@
 import html from "html-literal";
-import { header } from "../components";
+import { header, day, name } from "../components";
 import themeButton from "../assets/img/sliders-solid.svg";
 import unchecked from "../assets/img/unchecked.svg";
 import checked from "../assets/img/checked.svg";
@@ -16,10 +16,7 @@ export default state => html`
             </div>
             <hr class="dotted"/>
             <div class="greetingDate">
-              <h2 class="regText">hello name</h2>
-              <h2 class="date regText">day: ${
-                state.date.toString().split(" ")[0]
-              }</h2>
+              ${name()} ${day()}
             </div>
             <div class="toDoList">
               <h2 class="toDoHeader">To Do List:</h2>
@@ -59,6 +56,25 @@ export default state => html`
                 <div class="goalsRow">
                   <input type="text" id="input-box-two" placeholder="Add Your Text">
                   <button class="goalsButton" id="addGoalsButton">+</button>
+                  </div>
+                  <ul id="todo-list-container">
+                ${state.goals
+                  .map((goal, index) => {
+                    return html`
+                      <li id="${goal.id}">
+                        ${goal.goal}<button
+                          class="deleteGoalsButton"
+                          data-id="${goal._id}"
+                          data-index="${index}"
+                          data-goal="${goal.goal}"
+                        >
+                          ×
+                        </button>
+                      </li>
+                    `;
+                  })
+                  .join("")}
+              </ul>
                   </div>
                   <ul id="goals-list-container">
                   </ul>

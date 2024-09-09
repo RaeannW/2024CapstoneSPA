@@ -1,4 +1,4 @@
-import { header, main, nav } from "./components";
+import { main } from "./components";
 import * as store from "./store";
 import Navigo from "navigo";
 import { Calendar } from "@fullcalendar/core";
@@ -19,6 +19,100 @@ function render(state = store.notes) {
 }
 //invoke render inside router method (after router is set up)
 
+function notesAfterHook(){
+  document.getElementById("addTaskButton").addEventListener("click", event => {
+    event.preventDefault();
+    console.log("I was clicked");
+    const newToDo = document.getElementById("input-box").value;
+    const requestData = {
+      task: newToDo,
+    }
+
+    // Get the element
+    console.log("Input Element List", newToDo);
+    axios
+    .post(`${process.env.PLANPAL_API_URL}/toDo`, requestData)
+    .then(response => {
+      store.notes.toDos.push(response.data);
+      router.navigate("/notes");
+    })
+    .catch(error => {
+      console.log("It puked", error);
+    });
+  });
+
+  Array.from(document.getElementsByClassName("delete")).forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+
+      const todoId = event.target.dataset.id;
+      const todoTask = event.target.dataset.task;
+      const todoIndex = event.target.dataset.index;
+
+      if (confirm(`Are you sure you want to delete this task ${todoTask}?`)) {
+        axios
+          .delete(`${process.env.PLANPAL_API_URL}/toDo/${todoId}`)
+          .then(response => {
+            // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+            store.notes.toDos.splice(todoIndex, 1);
+            router.navigate("/notes");
+          })
+          .catch(error => {
+            console.log("It puked", error);
+          });
+      }
+    });
+  });
+}
+
+function goalsAfterHook(){
+  document.getElementById("addGoalsButton").addEventListener("click", event => {
+    event.preventDefault();
+    console.log("I was clicked");
+    const newGoal = document.getElementById("input-box-two").value;
+    const requestData = {
+      goal: newGoal,
+    }
+
+    // Get the element
+    console.log("Input Element List", newGoal);
+    axios
+    .post(`${process.env.PLANPAL_API_URL}/goals`, requestData)
+    .then(response => {
+      store.notes.goals.push(response.data);
+      router.navigate("/notes");
+    })
+    .catch(error => {
+      console.log("It puked", error);
+    });
+  });
+
+  Array.from(document.getElementsByClassName("deleteGoalsButton")).forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+
+      const goalId = event.target.dataset.id;
+      const goalGoal = event.target.dataset.goal;
+      const goalIndex = event.target.dataset.index;
+
+      if (confirm(`Are you sure you want to delete this goal ${goalGoal}?`)) {
+        axios
+          .delete(`${process.env.PLANPAL_API_URL}/goals/${goalId}`)
+          .then(response => {
+            // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+            store.notes.goals.splice(goalIndex, 1);
+            router.navigate("/notes");
+          })
+          .catch(error => {
+            console.log("It puked", error);
+          });
+      }
+    });
+  });
+}
+
+
+
 router.hooks({
   // We pass in the `done` function to the before hook handler to allow the function to tell Navigo we are finished with the before hook.
   // The `match` parameter is the data that is passed from Navigo to the before hook handler with details about the route being accessed.
@@ -36,10 +130,15 @@ router.hooks({
           .get(
             `https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&units=imperial&q=st%20louis`
           );
+          // To Dos
           const toDoRequest = axios
-          // Get request to retrieve the current weather data using the API key and providing a city name
           .get(
             `${process.env.PLANPAL_API_URL}/todo`
+          );
+          // Goals
+          const goalRequest = axios
+          .get(
+            `${process.env.PLANPAL_API_URL}/goals`
           );
         // const goalsRequest = axios
         //   // Get request to retrieve the current weather data using the API key and providing a city name
@@ -47,9 +146,9 @@ router.hooks({
         //     `${process.env.PLANPAL_API_URL}/goals`
         //   )
 
-        Promise.allSettled([weatherRequest, toDoRequest])
+        Promise.allSettled([weatherRequest, toDoRequest, goalRequest])
           .then((responses) => {
-            const [weatherResponse, toDoResponse] = responses;
+            const [weatherResponse, toDoResponse, goalResponse] = responses;
             // Create an object to be stored in the Home state from the response
             // Round Temp = Math.round();
             store.notes.weather = {
@@ -60,120 +159,11 @@ router.hooks({
             };
 
             store.notes.toDos = toDoResponse.value.data;
+            store.notes.goals = goalResponse.value.data;
 
             done();
           });
 
-            // //Add Tasks to To Do List
-            // const inputBox = document.getElementById("input-box");
-            // const listContainer = document.getElementById("list-container");
-
-            // function addTask() {
-            //   console.log("test");
-            //   if (inputBox.value === "") {
-            //     alert("You Must Write Something");
-            //   } else {
-            //     let li = document.createElement("li");
-            //     li.innerHTML = inputBox.value;
-            //     listContainer.appendChild(li);
-            //     let span = document.createElement("span");
-            //     span.innerHTML = "\u00d7";
-            //     li.appendChild(span);
-            //   }
-            //   inputBox.value = "";
-
-            //   //saveData function called to recall data
-            //   saveData();
-            // }
-
-            // //Task Button
-            // const addButton = document.getElementById("addTaskButton");
-            // if (addButton){
-            //   addButton.addEventListener("click", addTask);
-            // }
-
-            // listContainer.addEventListener(
-            //   "click",
-            //   function(e) {
-            //     if (e.target.tagName === "LI") {
-            //       e.target.classList.toggle("checked");
-            //       //saveData function
-            //       saveData();
-            //     } else if (e.target.tagName === "SPAN") {
-            //       e.target.parentElement.remove();
-            //       //saveData function
-            //       saveData();
-            //     }
-            //   },
-            //   false
-            // );
-
-            // //save task data
-            // function saveData(){
-            //   localStorage.setItem("data", listContainer.innerHTML);
-            // }
-            // function showTask(){
-            //   listContainer.innerHTML = localStorage.getItem("data");
-            // }
-            // showTask();
-
-            // //Add Goals List
-            // const inputBoxTwo = document.getElementById("input-box-two");
-            // const listContainerTwo = document.getElementById("list-container-two");
-
-            // function addGoals() {
-            //   console.log("test");
-            //   if (inputBoxTwo.value === "") {
-            //     alert("You Must Write Something");
-            //   } else {
-            //     let li = document.createElement("li");
-            //     li.innerHTML = inputBoxTwo.value;
-            //     listContainerTwo.appendChild(li);
-            //     let span = document.createElement("span");
-            //     span.innerHTML = "\u00d7";
-            //     li.appendChild(span);
-            //   }
-            //   inputBoxTwo.value = "";
-
-            //   //saveData function called to recall data
-            //   saveGoalsData();
-            // }
-
-            // //Goals Button
-            // const addGoalsButton = document.getElementById("addGoalsButton");
-            // if (addGoalsButton){
-            //   addGoalsButton.addEventListener("click", addGoals);
-            // }
-
-            // listContainerTwo.addEventListener(
-            //   "click",
-            //   function(e) {
-            //     if (e.target.tagName === "LI") {
-            //       e.target.classList.toggle("checked");
-            //       //saveGoalsData function
-            //       saveGoalsData();
-            //     } else if (e.target.tagName === "SPAN") {
-            //       e.target.parentElement.remove();
-            //       //saveGoalsData function
-            //       saveGoalsData();
-            //     }
-            //   },
-            //   false
-            // );
-
-            // //save goals data
-            // function saveGoalsData(){
-            //   localStorage.setItem("data", listContainerTwo.innerHTML);
-            // }
-            // function showGoals(){
-            //   listContainerTwo.innerHTML = localStorage.getItem("data");
-            // }
-            // showGoals();
-          // })
-          // .catch((err) => {
-          //   console.log(err);
-          //   done();
-          // });
         break;
 
       case "calendar":
@@ -211,102 +201,21 @@ router.hooks({
 
     //Runs After Render Code
     if (view === "notes"){
-      document.getElementById("addTaskButton").addEventListener("click", event => {
-        event.preventDefault();
-        console.log("I was clicked");
-        const newToDo = document.getElementById("input-box").value;
-        const requestData = {
-          task: newToDo,
-        }
-
-        // Get the element
-        console.log("Input Element List", newToDo);
-        axios
-        .post(`${process.env.PLANPAL_API_URL}/toDo`, requestData)
-        .then(response => {
-          store.notes.toDos.push(response.data);
-          router.navigate("/notes");
-        })
-        .catch(error => {
-          console.log("It puked", error);
-        });
-      });
-
-      Array.from(document.getElementsByClassName("delete")).forEach(button => {
-        console.log("Button.ID", button);
-        button.addEventListener("click", event => {
-          event.preventDefault();
-  
-          const todoId = event.target.dataset.id;
-          const todoTask = event.target.dataset.task;
-          const todoIndex = event.target.dataset.index;
-
-          if (confirm(`Are you sure you want to delete this task ${todoTask}?`)) {
-            axios
-              .delete(`${process.env.PLANPAL_API_URL}/toDo/${todoId}`)
-              .then(response => {
-                // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
-                store.notes.toDos.splice(todoIndex, 1);
-                router.navigate("/notes");
-              })
-              .catch(error => {
-                console.log("It puked", error);
-              });
-          }
-        });
-      });
+      notesAfterHook();
+      goalsAfterHook();
     }
   },
   after: (match) => {
     const view = match?.data?.view ? camelCase(match.data.view) : "notes";
     if (view === "notes"){
-      document.getElementById("addTaskButton").addEventListener("click", event => {
-        event.preventDefault();
-        console.log("I was clicked");
-        const newToDo = document.getElementById("input-box").value;
-        const requestData = {
-          task: newToDo,
-        }
-
-        // Get the element
-        console.log("Input Element List", newToDo);
-        axios
-        .post(`${process.env.PLANPAL_API_URL}/toDo`, requestData)
-        .then(response => {
-          store.notes.toDos.push(response.data);
-          router.navigate("/notes");
-        })
-        .catch(error => {
-          console.log("It puked", error);
-        });
-      });
-
-      Array.from(document.getElementsByClassName("delete")).forEach(button => {
-        button.addEventListener("click", event => {
-          event.preventDefault();
-  
-          const todoId = event.target.dataset.id;
-          const todoTask = event.target.dataset.task;
-          const todoIndex = event.target.dataset.index;
-
-          if (confirm(`Are you sure you want to delete this task ${todoTask}?`)) {
-            axios
-              .delete(`${process.env.PLANPAL_API_URL}/toDo/${todoId}`)
-              .then(response => {
-                // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
-                store.notes.toDos.splice(todoIndex, 1);
-                router.navigate("/notes");
-              })
-              .catch(error => {
-                console.log("It puked", error);
-              });
-          }
-        });
-      });
+      notesAfterHook();
+      goalsAfterHook();
     }
 
-    //CONTACT FORM
-    if (view === "contact") {
+    
+    //NAME - SHOWS NAME ON OTHER PAGES
+    if (view === "profile") {
+      console.log("inside profile view");
       // Add an event handler for the submit button on the form
       document.querySelector("form").addEventListener("submit", event => {
         event.preventDefault();
@@ -315,58 +224,8 @@ router.hooks({
         const inputList = event.target.elements;
         console.log("Input Element List", inputList);
     
-        // Create a request body object to send to the API
-        const requestData = {
-          firstName: inputList.fname.value,
-          lastName: inputList.lname.value,
-          email: inputList.email.value,
-          message: inputList.message.value,
-        };
-        // Log the request body to the console
-        console.log("request Body", requestData);
-    
-        axios
-          // Make a POST request to the API to create a message
-          .post(`${process.env.PLANPAL_API_URL}/contact`, requestData)
-          // If there is an error log it to the console
-          .catch(error => {
-            console.log("It puked", error);
-          });
-      });
-    }
-
-    
-    //NAME - SHOWS NAME ON OTHER PAGES
-    if (view === "profile") {
-      // Add an event handler for the submit button on the form
-      document.querySelector("form").addEventListener("submit", event => {
-        event.preventDefault();
-    
-        // Get the form element
-        const inputList = event.target.element;
-        console.log("Input Element List", inputList);
-    
-        // Create a request body object to send to the API
-        const requestData = {
-          username: inputList.username.value,
-        };
-        // Log the request body to the console
-        console.log("request Body", requestData);
-    
-        axios
-        // Make a POST request to the API to create a new pizza
-        .post(`${process.env.PLANPAL_API_URL}/username`, requestData)
-        .then((response) => {
-          // Create an object to be stored in the Home state from the response
-          store.profile.username = {
-            username: response.data.username,
-          };
-          done();
-        })
-        .catch((err) => {
-          console.log(err);
-          done();
-        });
+        store.profile.username = inputList.username.value;
+        router.navigate("/notes");
     });
   }
     
@@ -441,9 +300,9 @@ router.hooks({
     }
 
     // add menu toggle to bars icon in nav bar
-    // document.querySelector(".fa-bars").addEventListener("click", () => {
-    //   document.querySelector("nav > ul").classList.toggle("hidden--mobile");
-    // });
+    document.querySelector(".fa-bars").addEventListener("click", () => {
+      document.querySelector("nav > ul").classList.toggle("hidden--mobile");
+    });
     router.updatePageLinks();
   },
 });

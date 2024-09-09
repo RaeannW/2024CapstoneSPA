@@ -4,6 +4,6 @@ export default {
   weather: {},
   toDos: [],
   goals: [],
-  username: {},
+  username: "",
   date: new Date()
 };

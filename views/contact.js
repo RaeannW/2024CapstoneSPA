@@ -17,8 +17,9 @@ export default state => html`
     </div>
           <div class="contactLeft">
             <div class="contact">
-              <h3 class="headingContact">Send Us A Message</h3>
-              <form id="order" method="POST" action="">
+              <h3 class="headingContact">Send A Message</h3>
+              <form id="order"   action="https://formspree.io/f/xovabbld"
+              method="POST">
                 <label for="fname">First name:</label><br>
                 <input type="text" id="fname" name="fname" placeholder="First"/><br>
                 <label for="lname">Last name:</label><br>
