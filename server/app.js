@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import todo from "./routers/todo.js";
+import goal from "./routers/goals.js";
 // Initialize the Express application
 const app = express();
 
@@ -63,6 +64,7 @@ app.get("/status", (request, response) => {
 });
 
 app.use("/todo", todo);
+app.use("/goals", goal);
 
 // Tell the Express app to start listening
 // Let the humans know I am running and listening on 4040

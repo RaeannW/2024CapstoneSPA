@@ -28,7 +28,7 @@ export default state => html`
           transition into a front-end developer role.
         </p>
       </div>
-      <div class="aboutImg">
+      <div>
         <a href="https://www.raewiechens.com/" target="_blank">
           <img class="aboutImg" src="${design}" alt="design services" />
         </a>
@@ -46,9 +46,9 @@ export default state => html`
           <a href="https://www.raewiechens.com/" target="_blank">website</a> or Etsy shop:
           <a href="https://www.etsy.com/shop/RaeDoesDoodles" target="_blank">RaeDoesDoodles</a>.
           <br /><br />
-          When I'm not designing, I'm spending time with my fiance and two
-          rabbits, Bilbo and Serene. I'm a member of the St. Louis Rowing Club,
-          and enjoy spending time out in nature.
+          When I'm not designing, I'm hanging out with my fiance and two
+          rabbits, Bilbo and Serene. I'm a member of the St. Louis Rowing Club.
+          I enjoy spending time outdoors and traveling when I get the chance.
         </p>
       </div>
     </div>

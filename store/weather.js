@@ -1,5 +1,7 @@
 export default {
   header: "Weather Forecast",
   view: "weather",
-  weather: {}
+  weather: {},
+  username: {},
+  date: new Date()
 };

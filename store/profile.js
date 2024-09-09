@@ -1,6 +1,6 @@
 export default {
   header: "Profile Settings",
   view: "profile",
-  username: {},
+  username: "Guest",
   date: new Date()
 };

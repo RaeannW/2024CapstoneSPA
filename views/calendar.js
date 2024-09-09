@@ -1,5 +1,5 @@
 import html from "html-literal";
-import { header } from "../components";
+import { header, day, name } from "../components";
 import themeButton from "../assets/img/sliders-solid.svg";
 
 export default state => html`
@@ -14,8 +14,7 @@ export default state => html`
             </div>
             <hr class="dotted"/>
             <div class="greetingDate">
-            <h2 class="regText">hello name</h2>
-            <h2 class="date regText">day: ${state.date.toString().split(" ")[0]}</h2>
+              ${name()} ${day()}
             </div>
           </div>
           <div class="contentTwo">
