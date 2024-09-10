@@ -234,7 +234,7 @@ router.hooks({
 
     if (view === "calendar") {
       const calendarEl = document.getElementById("calendar");
-      calendar = new FullCalendar.Calendar(calendarEl, {
+      let calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
         headerToolbar: {
           left: "prev,next today",
