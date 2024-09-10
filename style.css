@@ -101,7 +101,8 @@ h2{
 }
 .socialIcon{
   width: 15px;
-  height: 18.5px;
+  margin-top: auto;
+  margin-bottom: auto;
   margin-left: 10px;
 }
 .regText{
